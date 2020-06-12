@@ -5,6 +5,7 @@ import { BASE_URL } from '../constants'
 import styled from 'styled-components'
 
 export default function Character(props) {
+    console.log('props: ' + JSON.stringify(props));
     const { starwarsCharacterId } = props
     // const [starwarsCharacter, setStarwarsCharacter] = useState(null)
 
@@ -21,11 +22,11 @@ export default function Character(props) {
     //         console.log(`📲 THE OLD ID WAS ${starwarsCharacterId}`)
     //     }
     // }, [starwarsCharacterId])
-    const displayKeys = ['name', 'gender', 'height', 'mass'];
-    const displayCharacters = [];
-    const displayValues = displayKeys.map((key, idx) => {
-        displayCharacters.push(`<li key=${idx} value=${props.key} />`);
-    });
+    const displayKeys = ['gender', 'height', 'mass'];
+    console.log(props);
+    const displayCharacters = displayKeys.map(k => props[k]);
+    console.log('displayKeys: ' + displayKeys);
+    console.log('displayCharacters: ' + displayCharacters);
 
     return (
         <div className='character-container'>
@@ -33,8 +34,8 @@ export default function Character(props) {
             <div className='character-info'>
                 <ul>
                     {
-                        displayKeys.map((key, idx) => {
-                            <li key={idx}>{props.key}</li>
+                        displayKeys.map((k, idx) => {
+                            return<li key={k}>{k}:{' '}{displayCharacters[idx]}</li>
                         })
                     }
                 </ul>

@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchPeopleData = () => {
-      axios.get(`${BASE_URL}/people`)
+      axios.get(`${BASE_URL}/people/`)
         .then((res) => {
           setPeopleData(res.data)
         })
@@ -37,13 +37,19 @@ const App = () => {
     return <h1>Loading...</h1>;
   }
 
+  console.log('peopleData:' + JSON.stringify(peopleData));
   return (
     <div className='home'>
       <div className="App">
         <h1 className="Header">Characters</h1>
       </div>
       {/* <SearchBar/> */}
-      {peopleData.results.map(x => <Character key={x}/>)}
+      {
+        peopleData.results.map((x) => {
+          console.log('x = ' + JSON.stringify(x));
+          return <Character {...x}/>
+        })
+      }
     </div>
   );
 }
